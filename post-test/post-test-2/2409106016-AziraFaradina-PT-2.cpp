@@ -9,12 +9,21 @@ int main() {
     string username, password;
     string stored_user = "Azira"; // username valid
     string stored_pass = "2409106016"; // password valid
+
+    // array multidimesi
     string passwords[100][4]; // data [website, username, password, waktu]
+
+    // array satu dimensi
+    string categories[100]; // kategori akun seperti sosial media, email, dll
+    string emails[100]; // alamat email yang terhubung
+    string password_strength[100]; // mengecek tingkat kekuatan password
+
     int password_count = 0;
     int login_attempts = 0;
     char repeat;
 
     do {
+        // menu login
         while (login_attempts < 3) {
             cout << "\n=== Sistem Login ===\n";
             cout << "Masukkan Username anda: ";
@@ -22,6 +31,7 @@ int main() {
             cout << "Masukkan Password anda: ";
             cin >> password;
 
+            // menu utama
             if (username == stored_user && password == stored_pass) {
                 cout << "Login berhasil! Selamat datang " << username << endl;
                 while (true) {
@@ -50,6 +60,22 @@ int main() {
                             cout << "Masukkan password: ";
                             getline(cin, passwords[password_count][2]);
 
+                            cout << "Masukkan kategori (misal: sosmed, perbankan, ecommerce, dll): ";
+                            getline(cin, categories[password_count]);
+
+                            cout << "Masukkan alamat email yang terhubung: ";
+                            getline(cin, emails[password_count]);
+
+                            // menentukan kekuatan password
+                            int length = passwords[password_count][2].length();
+                            if (length < 6) {
+                                password_strength[password_count] = "Lemah";
+                            } else if (length < 10) {
+                                password_strength[password_count] = "Sedang";
+                            } else {
+                                password_strength[password_count] = "Kuat";
+                            }
+
                             // mendapatkan waktu dan tanggal saat menyimpan input
                             time_t now = time(0);
                             passwords[password_count][3] = ctime(&now);
@@ -65,10 +91,10 @@ int main() {
                             cout << "Belum ada password yang tersimpan :(.)" << endl;
                         } else {
                             cout << "\n=== Daftar Password ===" << endl;
-                            cout << left << setw(5) << "No" << setw(20) << "Website" << setw(20) << "Username" << setw(20) << "Password" << "Waktu Dibuat" << endl;
-                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                            cout << left << setw(5) << "No" << setw(20) << "Website" << setw(20) << "Username" << setw(20) << "Password" << setw(15) << "Kategori" << setw(30) << "Email" << setw(12) << "Kekuatan" << "Waktu Dibuat" << endl;
+                            cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
                             for (int i = 0; i < password_count; i++) {
-                                cout << left << setw(5) << i + 1 << setw(20) << passwords[i][0] << setw(20) << passwords[i][1] << setw(20) << passwords[i][2] << passwords[i][3];
+                                cout << left << setw(5) << i + 1 << setw(20) << passwords[i][0] << setw(20) << passwords[i][1] << setw(20) << passwords[i][2] << setw(15) << categories[i] << setw(30) << emails[i] << setw(12) << password_strength[i] << passwords[i][3];
                             }
                         }
 
@@ -78,10 +104,10 @@ int main() {
                             cout << "Belum ada password yang tersimpan :(.)" << endl;
                         } else {
                             cout << "\n=== Daftar Password ===" << endl;
-                            cout << left << setw(5) << "No" << setw(20) << "Website" << setw(20) << "Username" << setw(20) << "Password" << "Waktu Dibuat" << endl;
-                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                            cout << left << setw(5) << "No" << setw(20) << "Website" << setw(20) << "Username" << setw(20) << "Password" << setw(15) << "Kategori" << setw(30) << "Email" << setw(12) << "Kekuatan" << "Waktu Dibuat" << endl;
+                            cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
                             for (int i = 0; i < password_count; i++) {
-                                cout << left << setw(5) << i + 1 << setw(20) << passwords[i][0] << setw(20) << passwords[i][1] << setw(20) << passwords[i][2] << passwords[i][3];
+                                cout << left << setw(5) << i + 1 << setw(20) << passwords[i][0] << setw(20) << passwords[i][1] << setw(20) << passwords[i][2] << setw(15) << categories[i] << setw(30) << emails[i] << setw(12) << password_strength[i] << passwords[i][3];
                             }
                             int index;
                             cout << "\n=== Update Password ===" << endl;
@@ -95,6 +121,21 @@ int main() {
                                 getline(cin, passwords[index - 1][1]);
                                 cout << "Masukkan password baru: ";
                                 getline(cin, passwords[index - 1][2]);
+
+                                cout << "Masukkan kategori baru: ";
+                                getline(cin, categories[index - 1]);
+
+                                cout << "Masukkan email baru: ";
+                                getline(cin, emails[index - 1]);
+
+                                int length = passwords[index - 1][2].length();
+                                if (length < 6) {
+                                    password_strength[index - 1] = "Lemah";
+                                } else if (length < 10) {
+                                    password_strength[index - 1] = "Sedang";
+                                } else {
+                                    password_strength[index - 1] = "Kuat";
+                                }
 
                                 time_t now = time(0);
                                 passwords[index - 1][3] = ctime(&now);
@@ -110,10 +151,10 @@ int main() {
                             cout << "Belum ada password yang tersimpan :(.)." << endl;
                         } else {
                             cout << "\n=== Daftar Password ===" << endl;
-                            cout << left << setw(5) << "No" << setw(20) << "Website" << setw(20) << "Username" << setw(20) << "Password" << "Waktu Dibuat" << endl;
-                            cout << "---------------------------------------------------------------------------------------------" << endl;
+                            cout << left << setw(5) << "No" << setw(20) << "Website" << setw(20) << "Username" << setw(20) << "Password" << setw(15) << "Kategori" << setw(30) << "Email" << setw(12) << "Kekuatan" << "Waktu Dibuat" << endl;
+                            cout << "-----------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
                             for (int i = 0; i < password_count; i++) {
-                                cout << left << setw(5) << i + 1 << setw(20) << passwords[i][0] << setw(20) << passwords[i][1] << setw(20) << passwords[i][2] << passwords[i][3];
+                                cout << left << setw(5) << i + 1 << setw(20) << passwords[i][0] << setw(20) << passwords[i][1] << setw(20) << passwords[i][2] << setw(15) << categories[i] << setw(30) << emails[i] << setw(12) << password_strength[i] << passwords[i][3];
                             }
                             int index;
                             cout << "\n=== Hapus Password ===" << endl;
@@ -143,7 +184,7 @@ int main() {
                 }
                 break;
             } else {
-                cout << "Username atau password salah!" << endl;
+                cout << "Username atau password anda salah. Coba lagi!" << endl;
                 login_attempts++;
             }
         }
