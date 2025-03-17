@@ -6,11 +6,11 @@ using namespace std;
 
 // program utama
 int main() {
-    string username, password;
+    string name, nim;
     string stored_user = "Azira"; // username valid
     string stored_pass = "2409106016"; // password valid
 
-    // array multidimesi
+    // array multidimensi
     string passwords[100][4]; // data [website, username, password, waktu]
 
     // array satu dimensi
@@ -25,15 +25,15 @@ int main() {
     do {
         // menu login
         while (login_attempts < 3) {
-            cout << "\n=== Sistem Login ===\n";
-            cout << "Masukkan Username anda: ";
-            cin >> username;
-            cout << "Masukkan Password anda: ";
-            cin >> password;
+            cout << "\n=== Menu Login ===\n";
+            cout << "Masukkan Nama anda: ";
+            cin >> name;
+            cout << "Masukkan NIM anda: ";
+            cin >> nim;
 
             // menu utama
-            if (username == stored_user && password == stored_pass) {
-                cout << "Login berhasil! Selamat datang " << username << endl;
+            if (name == stored_user && nim == stored_pass) {
+                cout << "Login berhasil! Selamat datang " << name << endl;
                 while (true) {
                     cout << "\n=================================" << endl;
                     cout << "|   Sistem Manajemen Password   |" << endl;
@@ -45,12 +45,12 @@ int main() {
                     cout << "|      5. Logout                |" << endl;
                     cout << "=================================" << endl;
                     cout << "Pilih opsi: ";
-                    int pilihan;
-                    cin >> pilihan;
+                    int choice;
+                    cin >> choice;
                     cin.ignore();
 
                     // tambah password
-                    if (pilihan == 1) { 
+                    if (choice == 1) { 
                         if (password_count < 100) {
                             cout << "\n=== Tambah Password ===" << endl;
                             cout << "Masukkan nama website/platform: ";
@@ -86,7 +86,7 @@ int main() {
                         }
 
                     // lihat passowrd
-                    } else if (pilihan == 2) {
+                    } else if (choice == 2) {
                         if (password_count == 0) {
                             cout << "Belum ada password yang tersimpan :(.)" << endl;
                         } else {
@@ -99,7 +99,7 @@ int main() {
                         }
 
                     // update password
-                    } else if (pilihan == 3) {
+                    } else if (choice == 3) {
                         if (password_count == 0) {
                             cout << "Belum ada password yang tersimpan :(.)" << endl;
                         } else {
@@ -146,7 +146,7 @@ int main() {
                         }
 
                     // hapus password
-                    } else if (pilihan == 4) {
+                    } else if (choice == 4) {
                         if (password_count == 0) {
                             cout << "Belum ada password yang tersimpan :(.)." << endl;
                         } else {
@@ -175,7 +175,7 @@ int main() {
                         }
 
                     // keluar dari menu
-                    } else if (pilihan == 5) {
+                    } else if (choice == 5) {
                         cout << "Logout berhasil!" << endl;
                         break;
                     } else {
@@ -189,15 +189,16 @@ int main() {
             }
         }
         if (login_attempts == 3) {
-            cout << "Kesempatan login habis. Program berhenti." << endl;
+            cout << "Terlalu banyak percobaan. Program berhenti." << endl;
             break;
         }
     
+        // menanyakan apakah pengguna ingin berhenti menggunakan program atau tidak
         cout << "Apakah anda masih ingin menggunakan program? (y/n): ";
         cin >> repeat;
 
     } while (repeat == 'y' || repeat == 'Y');
-    cout << "Terima kasih telah menggunakan program ini!" << endl;
+    cout << "Terima kasih!" << endl;
 
     return 0;
 }
