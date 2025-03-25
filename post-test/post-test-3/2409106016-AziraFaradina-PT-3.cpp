@@ -174,7 +174,7 @@ int main() {
                                  << setw(12) << pass.strength << pass.waktu;
                         }
                         int index;
-                        cout << "Masukkan nomor password yang ingin diupdate: ";
+                        cout << "Masukkan nomor password yang ingin di update: ";
                         cin >> index;
                         cin.ignore();
                         if (index > 0 && index <= users[current_user].jumlah_pass) {
